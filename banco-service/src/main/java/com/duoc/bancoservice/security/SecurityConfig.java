@@ -23,15 +23,13 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http
+http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/actuator/health").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
             )
-            .oauth2ResourceServer(oauth2 ->
-                oauth2.jwt(Customizer.withDefaults())
+            .oauth2ResourceServer(oauth2 -> 
+                oauth2.jwt(org.springframework.security.config.Customizer.withDefaults())
             );
 
         return http.build();

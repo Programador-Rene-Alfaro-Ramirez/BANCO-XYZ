@@ -1,6 +1,8 @@
 com\duoc\bancoservice\service\ServicioPrueba.class
 com\duoc\bancoservice\controller\CuentaController.class
 com\duoc\bancoservice\repository\CuentaRepository.class
+com\duoc\bancoservice\config\JmsConfig.class
+com\duoc\bancoservice\dto\TransaccionEvent.class
 com\duoc\bancoservice\repository\InteresRepository.class
 com\duoc\bancoservice\controller\InteresController.class
 com\duoc\bancoservice\model\Cuenta.class
