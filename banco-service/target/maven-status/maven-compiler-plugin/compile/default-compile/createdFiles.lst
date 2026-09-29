@@ -6,6 +6,7 @@ com\duoc\bancoservice\dto\TransaccionEvent.class
 com\duoc\bancoservice\repository\InteresRepository.class
 com\duoc\bancoservice\controller\InteresController.class
 com\duoc\bancoservice\model\Cuenta.class
+com\duoc\bancoservice\service\TransaccionJmsService.class
 com\duoc\bancoservice\config\DataLoader.class
 com\duoc\bancoservice\repository\TransaccionRepository.class
 com\duoc\bancoservice\security\SecurityConfig.class

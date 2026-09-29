@@ -17,6 +17,7 @@ public class Transaccion {
     private String fecha;
     private Double monto;
     private String tipo;
+    private String estado;
 
     public Transaccion() {
     }
@@ -51,5 +52,13 @@ public class Transaccion {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
