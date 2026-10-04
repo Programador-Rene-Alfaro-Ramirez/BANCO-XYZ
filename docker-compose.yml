@@ -1,0 +1,82 @@
+services:
+
+  activemq:
+    image: apache/activemq-classic:latest
+    container_name: activemq
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    networks:
+      - banco-network
+
+  config-server:
+    build: ./config-server
+    container_name: config-server
+    ports:
+      - "8888:8888"
+    networks:
+      - banco-network
+
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-server
+    networks:
+      - banco-network
+
+  banco-service:
+    build: ./banco-service
+    container_name: banco-service
+    ports:
+      - "8080:8080"
+    environment:
+      CONFIG_SERVER_URL: http://config-server:8888
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      ACTIVEMQ_URL: tcp://activemq:61616
+      ACTIVEMQ_USER: admin
+      ACTIVEMQ_PASSWORD: admin
+    depends_on:
+      - config-server
+      - eureka-server
+      - activemq
+    networks:
+      - banco-network
+
+  cuenta-service:
+    build: ./cuenta-service
+    container_name: cuenta-service
+    ports:
+      - "8082:8082"
+    environment:
+      CONFIG_SERVER_URL: http://config-server:8888
+      EUREKA_URL: http://eureka-server:8761/eureka/
+      ACTIVEMQ_URL: tcp://activemq:61616
+      ACTIVEMQ_USER: admin
+      ACTIVEMQ_PASSWORD: admin
+    depends_on:
+      - config-server
+      - eureka-server
+      - activemq
+    networks:
+      - banco-network
+
+  transaccion-service:
+    build: ./transaccion-service
+    container_name: transaccion-service
+    ports:
+      - "8083:8083"
+    environment:
+      CONFIG_SERVER_URL: http://config-server:8888
+      EUREKA_URL: http://eureka-server:8761/eureka/
+    depends_on:
+      - config-server
+      - eureka-server
+    networks:
+      - banco-network
+
+networks:
+  banco-network:
+    driver: bridge
